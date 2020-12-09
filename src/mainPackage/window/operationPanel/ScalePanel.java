@@ -1,5 +1,6 @@
 package mainPackage.window.operationPanel;
 
+
 import mainPackage.Main;
 import mainPackage.figures.Figure;
 
@@ -7,7 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
-public class RotatePanel extends JPanel {
+public class ScalePanel extends JPanel {
     JLabel jLabelX = new JLabel("X =");
     JLabel jLabelY = new JLabel("Y =");
     JLabel jLabelZ = new JLabel("Z =");
@@ -16,28 +17,28 @@ public class RotatePanel extends JPanel {
     JTextArea jTextAreaOfY = new JTextArea();
     JTextArea jTextAreaOfZ = new JTextArea();
 
-    JButton buttonRotate = new JButton("Rotate");
+    JButton buttonScale = new JButton("Rotate");
 
-    public RotatePanel() {
+    public ScalePanel() {
         setLayout(new GridBagLayout());
         GridBagConstraints dbc = new GridBagConstraints();
 
         jLabelX.setHorizontalAlignment(JTextField.RIGHT);
         AddComponent(0, 0, dbc, jLabelX);
 
-        jTextAreaOfX.setText("0");
+        jTextAreaOfX.setText("1");
         AddComponent(0, 1, dbc, jTextAreaOfX);
 
         jLabelY.setHorizontalAlignment(JTextField.RIGHT);
         AddComponent(1, 0,dbc, jLabelY);
 
-        jTextAreaOfY.setText("0");
+        jTextAreaOfY.setText("1");
         AddComponent(1,1,dbc,jTextAreaOfY);
 
         jLabelZ.setHorizontalAlignment(JTextField.RIGHT);
         AddComponent(2,0,dbc,jLabelZ);
 
-        jTextAreaOfZ.setText("0");
+        jTextAreaOfZ.setText("1");
         AddComponent(2,1,dbc,jTextAreaOfZ);
 
 
@@ -46,9 +47,9 @@ public class RotatePanel extends JPanel {
         dbc.gridx = 0;
         dbc.weightx = 1;
         dbc.gridwidth = 2;
-        add(buttonRotate, dbc);
-        ActionListenerRotate actionListener = new ActionListenerRotate();
-        buttonRotate.addActionListener(actionListener);
+        add(buttonScale, dbc);
+        ActionListenerScale actionListenerScale = new ActionListenerScale();
+        buttonScale.addActionListener(actionListenerScale);
 
     }
 
@@ -61,11 +62,11 @@ public class RotatePanel extends JPanel {
         add(jComponent, dbc);
     }
 
-    class ActionListenerRotate implements java.awt.event.ActionListener {
+    class ActionListenerScale implements java.awt.event.ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             for (Figure figure : Main.getModel().getFigures()) {
-                figure.rotate(Double.parseDouble(jTextAreaOfX.getText()),
+                figure.scale(Double.parseDouble(jTextAreaOfX.getText()),
                         Double.parseDouble(jTextAreaOfY.getText()),
                         Double.parseDouble(jTextAreaOfZ.getText()));
             }

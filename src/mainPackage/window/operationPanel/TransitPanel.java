@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
-public class RotatePanel extends JPanel {
+public class TransitPanel extends JPanel {
     JLabel jLabelX = new JLabel("X =");
     JLabel jLabelY = new JLabel("Y =");
     JLabel jLabelZ = new JLabel("Z =");
@@ -16,9 +16,9 @@ public class RotatePanel extends JPanel {
     JTextArea jTextAreaOfY = new JTextArea();
     JTextArea jTextAreaOfZ = new JTextArea();
 
-    JButton buttonRotate = new JButton("Rotate");
+    JButton buttonTransit = new JButton("Transit");
 
-    public RotatePanel() {
+    public TransitPanel() {
         setLayout(new GridBagLayout());
         GridBagConstraints dbc = new GridBagConstraints();
 
@@ -46,9 +46,9 @@ public class RotatePanel extends JPanel {
         dbc.gridx = 0;
         dbc.weightx = 1;
         dbc.gridwidth = 2;
-        add(buttonRotate, dbc);
-        ActionListenerRotate actionListener = new ActionListenerRotate();
-        buttonRotate.addActionListener(actionListener);
+        add(buttonTransit, dbc);
+        ActionListenerTransit actionListener = new ActionListenerTransit();
+        buttonTransit.addActionListener(actionListener);
 
     }
 
@@ -61,11 +61,11 @@ public class RotatePanel extends JPanel {
         add(jComponent, dbc);
     }
 
-    class ActionListenerRotate implements java.awt.event.ActionListener {
+    class ActionListenerTransit implements java.awt.event.ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             for (Figure figure : Main.getModel().getFigures()) {
-                figure.rotate(Double.parseDouble(jTextAreaOfX.getText()),
+                figure.transit(Double.parseDouble(jTextAreaOfX.getText()),
                         Double.parseDouble(jTextAreaOfY.getText()),
                         Double.parseDouble(jTextAreaOfZ.getText()));
             }

@@ -1,5 +1,7 @@
 package mainPackage.geometry;
 
+import java.awt.image.BandCombineOp;
+
 public class Operations {
 
     public static void transit(Point point, double dx, double dy, double dz) {
@@ -31,7 +33,13 @@ public class Operations {
                 {0, 0, 0, 1}};
     }
 
+    public static double fromAngleToRadians(double angle){
+        return Math.toRadians(angle);
+    }
     private static double[][] createRotateMatr(double angleX, double angleY, double angleZ) {
+        angleX = fromAngleToRadians(angleX);
+        angleY = fromAngleToRadians(angleY);
+        angleZ = fromAngleToRadians(angleZ);
         double[][] ROx = {
                 {1.0, 0, 0, 0},
                 {0, Math.cos(angleX), Math.sin(angleX), 0},

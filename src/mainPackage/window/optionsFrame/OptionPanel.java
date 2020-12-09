@@ -1,7 +1,9 @@
 package mainPackage.window.optionsFrame;
 
 import mainPackage.window.operationPanel.DrawingPanel;
-
+import mainPackage.window.operationPanel.RotatePanel;
+import mainPackage.window.operationPanel.ScalePanel;
+import mainPackage.window.operationPanel.TransitPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,12 +24,24 @@ public class OptionPanel extends JPanel {
         jPanelForDrawing.add(drawingPanel);
 
         jPanelForScaling = createPanel();
-
+        RotatePanel rotatePanel = new RotatePanel();
         jPanelForScaling.setLayout(new GridLayout(10,2,10,10));
-        //jPanelForScaling.add();
+        jPanelForScaling.add(rotatePanel);
+
+        jPanelForScaling = createPanel();
+        TransitPanel transitPanel = new TransitPanel();
+        jPanelForScaling.setLayout(new GridLayout(10,2,10,10));
+        jPanelForScaling.add(transitPanel);
+
+        jPanelForScaling = createPanel();
+        ScalePanel scalePanel = new ScalePanel();
+        jPanelForScaling.setLayout(new GridLayout(10,2,10,10));
+        jPanelForScaling.add(scalePanel);
 
         tabs.addTab("Paint", drawingPanel);
-        //tabs.addTab("FuckU", panel5);
+        tabs.addTab("Rotate", rotatePanel);
+        tabs.addTab("Transit",transitPanel);
+        tabs.addTab("Scale", scalePanel);
         add(tabs);
     }
 
