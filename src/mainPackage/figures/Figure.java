@@ -53,6 +53,18 @@ public abstract class Figure {
         }
     }
 
+    public void axonometric(double psi, double fi) {
+        for (Point point : points) {
+            Operations.axonometric(point, psi, fi);
+        }
+    }
+
+    public void oblique(double l, double ro) {
+        for (Point point : points) {
+            Operations.oblique(point, l, ro);
+        }
+    }
+
     public void reset() {
         for (Point point : points) {
             point.resetCoordinates();

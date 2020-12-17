@@ -1,6 +1,7 @@
 package mainPackage.geometry;
 
-import java.awt.image.BandCombineOp;
+import static java.lang.Math.cos;
+import static java.lang.Math.sin;
 
 public class Operations {
 
@@ -16,6 +17,31 @@ public class Operations {
         point.setCoordinates(multiplyByMatrix(point.getCoordinates(), createRotateMatr(angleX, angleY, angleZ)));
     }
 
+    public static void oblique(Point point, double l, double a) {
+        point.setCoordinates(multiplyByMatrix(point.getCoordinates(), createObliqueMatr(l, a)));
+    }
+
+    public static void axonometric(Point point, double psi, double fi) {
+        point.setCoordinates(multiplyByMatrix(point.getCoordinates(), createAxonometricMatr(psi, fi)));
+    }
+
+    private static double[][] createObliqueMatr(double l, double a) {
+        return new double[][]{
+                {1, 0, 0, 0},
+                {0, 1, 0, 0},
+                {l*cos(a), l*sin(a), 1, 0},
+                {0, 0, 0, 1}};
+    }
+
+    private static double[][] createAxonometricMatr(double psi, double fi) {
+        psi = fromAngleToRadians(psi);
+        fi = fromAngleToRadians(fi);
+        return new double[][]{
+                {cos(psi), sin(fi) * sin(psi), 0, 0},
+                {0, cos(fi), 0, 0},
+                {sin(psi), -sin(fi) * cos(psi), 1, 0},
+                {0, 0, 0, 1}};
+    }
 
     private static double[][] createTransitMatr(double dx, double dy, double dz) {
         return new double[][]{
@@ -36,6 +62,7 @@ public class Operations {
     public static double fromAngleToRadians(double angle){
         return Math.toRadians(angle);
     }
+
     private static double[][] createRotateMatr(double angleX, double angleY, double angleZ) {
         angleX = fromAngleToRadians(angleX);
         angleY = fromAngleToRadians(angleY);
@@ -76,4 +103,29 @@ public class Operations {
         }
         return mResult;
     }
+
+    public static void perspective(Point point, double d, double ro, double fi, double teta) {
+        point.setCoordinates(multiplyByMatrix(point.getCoordinates(), createViewMatr(ro, fi, teta)));
+        point.setCoordinates(new double[][]{{-point.getY(), point.getX(), point.getZ(), 1}});
+        point.setCoordinates(multiplyByMatrix(point.getCoordinates(), createPerspectiveMatr(d)));
+        point.setCoordinates(new double[][]{{point.getX() / point.getLast(), point.getY() / point.getLast(),
+                point.getZ() / point.getLast(), 1}});
+    }
+
+    private static double[][] createViewMatr(double ro, double fi, double teta) {
+        return new double[][]{
+                {-sin(teta), -cos(fi) * cos(teta), -sin(fi) * cos(teta), 0},
+                {cos(teta), -cos(fi) * sin(teta), -sin(fi) * sin(teta), 0},
+                {0, sin(fi), cos(fi), 0},
+                {0, 0, ro, 1}};
+    }
+
+    private static double[][] createPerspectiveMatr(double d) {
+        return new double[][]{
+                {1, 0, 0, 0},
+                {0, 1, 0, 0},
+                {0, 0, 1, 1 / d},
+                {0, 0, 0, 1}};
+    }
+
 }

@@ -1,9 +1,6 @@
 package mainPackage.window.optionsFrame;
 
-import mainPackage.window.operationPanel.DrawingPanel;
-import mainPackage.window.operationPanel.RotatePanel;
-import mainPackage.window.operationPanel.ScalePanel;
-import mainPackage.window.operationPanel.TransitPanel;
+import mainPackage.window.operationPanel.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,6 +8,7 @@ import java.awt.*;
 public class OptionPanel extends JPanel {
     JPanel jPanelForDrawing;
     JPanel jPanelForScaling;
+    JPanel jPanelForOblique;
 
     public OptionPanel() {
         JTabbedPane tabs = new JTabbedPane(JTabbedPane.TOP);
@@ -38,10 +36,22 @@ public class OptionPanel extends JPanel {
         jPanelForScaling.setLayout(new GridLayout(10,2,10,10));
         jPanelForScaling.add(scalePanel);
 
+        jPanelForOblique = createPanel();
+        ObliquePanel obliquePanel = new ObliquePanel();
+        jPanelForScaling.setLayout(new GridLayout(10,2,5,5));
+        jPanelForOblique.add(obliquePanel);
+
+        jPanelForOblique = createPanel();
+        AxonometricPanel axonometricPanel = new AxonometricPanel();
+        jPanelForScaling.setLayout(new GridLayout(10,2,5,5));
+        jPanelForOblique.add(axonometricPanel);
+
         tabs.addTab("Paint", drawingPanel);
         tabs.addTab("Rotate", rotatePanel);
         tabs.addTab("Transit",transitPanel);
         tabs.addTab("Scale", scalePanel);
+        tabs.addTab("Oblique", obliquePanel);
+        tabs.addTab("Axonom", axonometricPanel);
         add(tabs);
     }
 

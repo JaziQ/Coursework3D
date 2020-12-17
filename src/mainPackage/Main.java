@@ -14,20 +14,19 @@ public class Main {
         optionFrame = new OptionFrame(mainFrame);
     }
 
-    public static void getCone(){
-        //TODO: Init component
+    public static Model getModel() {
+        return model;
     }
 
-    public static void initRotate(){
-        //TODO: Init component
+    public static void setModel(int a, int b, int c, int dY, int dZ, int h, int r, int app) {
+        model = new Model(a, b, c, dY, dZ, h, r, app);
     }
 
-    public static Model getModel() { return model; }
-
-    public static void setModel(int a, int b, int c, int dY, int dZ, int h, int r, int app){
-        model = new Model(a,b,c,dY,dZ,h,r,app);
+    public static MainFrame getMainFrame() {
+        return mainFrame;
     }
-    public static MainFrame getMainFrame() { return mainFrame; }
 
-    public static OptionFrame getOptionFrame(){return optionFrame; }
+    public static OptionFrame getOptionFrame() {
+        return optionFrame;
+    }
 }

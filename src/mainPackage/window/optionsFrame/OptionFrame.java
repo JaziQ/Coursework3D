@@ -14,25 +14,6 @@ public class OptionFrame extends JFrame {
         OptionPanel optionPanel = new OptionPanel();
         add(optionPanel);
 
-        /*addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                super.keyPressed(e);
-                if (e.getKeyCode() == KeyEvent.VK_A) {
-                    for (Figure figure : Main.getModel().getFigures()) {
-                        figure.scale(1,1.5, 1);
-                    }
-                }
-                if (e.getKeyCode() == KeyEvent.VK_D) {
-                    for (Figure figure :
-                            Main.getModel().getFigures()) {
-                        figure.transit(1,1.5, 1);
-                    }
-                }
-
-                mainFrame.repaint();
-            }
-        });*/
         setVisible(true);
     }
 }

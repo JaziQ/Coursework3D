@@ -26,7 +26,6 @@ public class DrawingPanel extends JPanel {
     JLabel jLabelH = new JLabel("H =");
     JLabel jLabelApp = new JLabel("Approximation =");
 
-
     public DrawingPanel() {
         setPreferredSize(new Dimension(600, 400));
         setLayout(new GridBagLayout());

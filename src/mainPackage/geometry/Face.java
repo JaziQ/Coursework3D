@@ -11,11 +11,11 @@ public class Face {
     }
 
     public Face(Face f) {
-        Point[] vert = f.getPoints();
+        Point[] points = f.getPoints();
         Edge[] edg = f.getEdges();
-        points = new Point[vert.length];
-        for (int i = 0; i < points.length; i++) {
-            points[i] = new Point(vert[i]);
+        this.points = new Point[points.length];
+        for (int i = 0; i < this.points.length; i++) {
+            this.points[i] = new Point(points[i]);
         }
         edges = new Edge[edg.length];
         for (int i = 0; i < edges.length; i++) {
