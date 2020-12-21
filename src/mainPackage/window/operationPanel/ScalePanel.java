@@ -17,7 +17,7 @@ public class ScalePanel extends JPanel {
     JTextArea jTextAreaOfY = new JTextArea();
     JTextArea jTextAreaOfZ = new JTextArea();
 
-    JButton buttonScale = new JButton("Rotate");
+    JButton buttonScale = new JButton("Scale");
 
     public ScalePanel() {
         setLayout(new GridBagLayout());

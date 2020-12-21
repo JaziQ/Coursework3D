@@ -2,22 +2,18 @@ package mainPackage.window.operationPanel;
 
 import mainPackage.Main;
 import mainPackage.figures.Figure;
+import mainPackage.window.interfaces.Projections;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
-public class AxonometricPanel extends JPanel {
+public class AxonometricPanel extends JPanel implements Projections {
     JLabel jLabelD = new JLabel("psi =");
-    JLabel jLabelRo = new JLabel("ro =");
     JLabel jLabelFi = new JLabel("fi =");
-    JLabel jLabelTeta = new JLabel("teta =");
-
 
     JTextArea jTextAreaOfPsi = new JTextArea();
     JTextArea jTextAreaOfFi = new JTextArea();
-    JTextArea jTextAreaOfRo = new JTextArea();
-    JTextArea jTextAreaOfTeta = new JTextArea();
 
     JButton buttonOblique = new JButton("Set");
 
@@ -59,10 +55,9 @@ public class AxonometricPanel extends JPanel {
     class ActionListenerAxonometric implements java.awt.event.ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            for (Figure figure : Main.getModel().getFigures()) {
-                figure.axonometric(Double.parseDouble(jTextAreaOfPsi.getText()),
-                        Double.parseDouble(jTextAreaOfFi.getText()));
-            }
+            Main.getModel().setProjection(AXONOMETRIC);
+            Main.getModel().setAxonometric(Double.parseDouble(jTextAreaOfPsi.getText()),
+                    Double.parseDouble(jTextAreaOfFi.getText()));
             Main.getMainFrame().getDrawingComponent().repaint();
         }
     }

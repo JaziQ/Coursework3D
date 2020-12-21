@@ -1,10 +1,11 @@
 package mainPackage.geometry;
 
 import mainPackage.Main;
+import mainPackage.window.interfaces.Projections;
 
 import java.awt.*;
 
-public class Edge {
+public class Edge implements Projections {
     private Point p1;
     private Point p2;
 
@@ -19,29 +20,33 @@ public class Edge {
     }
 
     public double getX1() {
-        return  p1.getCoordinates()[0][0];
+        return p1.getCoordinates()[0][0];
     }
+
     public double getX2() {
-        return  p2.getCoordinates()[0][0];
+        return p2.getCoordinates()[0][0];
     }
 
     public double getY1() {
-        return  p1.getCoordinates()[0][1];
+        return p1.getCoordinates()[0][1];
     }
+
     public double getY2() {
-        return  p2.getCoordinates()[0][1];
+        return p2.getCoordinates()[0][1];
     }
 
     public double getZ1() {
-        return  p1.getCoordinates()[0][2];
+        return p1.getCoordinates()[0][2];
     }
+
     public double getZ2() {
-        return  p2.getCoordinates()[0][2];
+        return p2.getCoordinates()[0][2];
     }
 
     public Point getP1() {
         return p1;
     }
+
     public void setP1(Point p1) {
         this.p1 = p1;
     }
@@ -49,14 +54,31 @@ public class Edge {
     public Point getP2() {
         return p2;
     }
+
     public void setP2(Point p2) {
         this.p2 = p2;
     }
 
-    public void drawEdge(Graphics2D graphics2D) {
-        graphics2D.drawLine((int) p1.getX() + Main.getMainFrame().getWidth() / 2,
-                -(int) p1.getY() + Main.getMainFrame().getHeight() / 2,
-                (int) p2.getX() + Main.getMainFrame().getWidth() / 2,
-                -(int) p2.getY()  + Main.getMainFrame().getHeight() / 2);
+    public void drawEdge(Graphics2D graphics2D, int project) {
+        switch (project) {
+            case HORIZONTAL:
+                graphics2D.drawLine((int) p1.getX() + Main.getMainFrame().getWidth() / 2,
+                        -(int) p1.getZ() + Main.getMainFrame().getHeight() / 2,
+                        (int) p2.getX() + Main.getMainFrame().getWidth() / 2,
+                        -(int) p2.getZ() + Main.getMainFrame().getHeight() / 2);
+                break;
+            case PROFILE:
+                graphics2D.drawLine((int) p1.getZ() + Main.getMainFrame().getWidth() / 2,
+                        -(int) p1.getY() + Main.getMainFrame().getHeight() / 2,
+                        (int) p2.getZ() + Main.getMainFrame().getWidth() / 2,
+                        -(int) p2.getY() + Main.getMainFrame().getHeight() / 2);
+                break;
+            default:
+                graphics2D.drawLine((int) p1.getX() + Main.getMainFrame().getWidth() / 2,
+                        -(int) p1.getY() + Main.getMainFrame().getHeight() / 2,
+                        (int) p2.getX() + Main.getMainFrame().getWidth() / 2,
+                        -(int) p2.getY() + Main.getMainFrame().getHeight() / 2);
+                break;
+        }
     }
 }

@@ -1,18 +1,22 @@
 package mainPackage.window.operationPanel;
 
 import mainPackage.Main;
-import mainPackage.figures.Figure;
+import mainPackage.window.interfaces.Projections;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
-public class PerspectivePanel extends JPanel {
-    JLabel jLabelL = new JLabel("L =");
+public class PerspectivePanel extends JPanel implements Projections {
+    JLabel jLabelD = new JLabel("D =");
     JLabel jLabelRo = new JLabel("ro =");
+    JLabel jLabelFi = new JLabel("fi =");
+    JLabel jLabelTeta = new JLabel("teta =");
 
-    JTextArea jTextAreaOfL = new JTextArea();
+    JTextArea jTextAreaOfD = new JTextArea();
     JTextArea jTextAreaOfRo = new JTextArea();
+    JTextArea jTextAreaOfFi = new JTextArea();
+    JTextArea jTextAreaOfTeta = new JTextArea();
 
     JButton buttonOblique = new JButton("Set");
 
@@ -20,17 +24,29 @@ public class PerspectivePanel extends JPanel {
         setLayout(new GridBagLayout());
         GridBagConstraints dbc = new GridBagConstraints();
 
-        jLabelL.setHorizontalAlignment(JTextField.RIGHT);
-        AddComponent(0, 0, dbc, jLabelL);
+        jLabelD.setHorizontalAlignment(JTextField.RIGHT);
+        AddComponent(0, 0, dbc, jLabelD);
 
-        jTextAreaOfL.setText("0.5");
-        AddComponent(0, 1, dbc, jTextAreaOfL);
+        jTextAreaOfD.setText("200");
+        AddComponent(0, 1, dbc, jTextAreaOfD);
 
         jLabelRo.setHorizontalAlignment(JTextField.RIGHT);
         AddComponent(1, 0, dbc, jLabelRo);
 
-        jTextAreaOfRo.setText("40");
+        jTextAreaOfRo.setText("100");
         AddComponent(1, 1, dbc, jTextAreaOfRo);
+
+        jLabelFi.setHorizontalAlignment(JTextField.RIGHT);
+        AddComponent(2, 0, dbc, jLabelFi);
+
+        jTextAreaOfFi.setText("0");
+        AddComponent(2, 1, dbc, jTextAreaOfFi);
+
+        jLabelTeta.setHorizontalAlignment(JTextField.RIGHT);
+        AddComponent(3, 0, dbc, jLabelTeta);
+
+        jTextAreaOfTeta.setText("0");
+        AddComponent(3, 1, dbc, jTextAreaOfTeta);
 
         dbc.ipady = 10;
         dbc.gridy = 8;
@@ -54,10 +70,11 @@ public class PerspectivePanel extends JPanel {
     class ActionListenerPerspective implements java.awt.event.ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            for (Figure figure : Main.getModel().getFigures()) {
-                figure.oblique(Double.parseDouble(jTextAreaOfL.getText()),
-                        Double.parseDouble(jTextAreaOfRo.getText()));
-            }
+            Main.getModel().setProjection(PERSPECTIVE);
+            Main.getModel().setPerspective(Double.parseDouble(jTextAreaOfD.getText()),
+                    Double.parseDouble(jTextAreaOfRo.getText()),
+                    Double.parseDouble(jTextAreaOfFi.getText()),
+                    Double.parseDouble(jTextAreaOfTeta.getText()));
             Main.getMainFrame().getDrawingComponent().repaint();
         }
     }

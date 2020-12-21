@@ -23,9 +23,9 @@ public class Face {
         }
     }
 
-    public void drawFace(Graphics2D graphics2D) {
+    public void drawFace(Graphics2D graphics2D, int project) {
         for (Edge edge : edges) {
-            edge.drawEdge(graphics2D);
+            edge.drawEdge(graphics2D, project);
         }
     }
 
@@ -33,7 +33,7 @@ public class Face {
         graphics2D.setStroke(new BasicStroke(2));
         graphics2D.setColor(Color.BLACK);
         for (Edge edge : edges) {
-            edge.drawEdge(graphics2D);
+            edge.drawEdge(graphics2D, 0);
         }
     }
 

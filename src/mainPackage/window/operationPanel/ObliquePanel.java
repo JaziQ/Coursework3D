@@ -2,13 +2,14 @@ package mainPackage.window.operationPanel;
 
 import mainPackage.Main;
 import mainPackage.figures.Figure;
+import mainPackage.window.interfaces.Projections;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
-public class ObliquePanel extends JPanel {
-    JLabel jLabelL = new JLabel("L =");
+public class ObliquePanel extends JPanel implements Projections {
+    JLabel jLabelL = new JLabel("l =");
     JLabel jLabelRo = new JLabel("ro =");
 
     JTextArea jTextAreaOfL = new JTextArea();
@@ -23,13 +24,13 @@ public class ObliquePanel extends JPanel {
         jLabelL.setHorizontalAlignment(JTextField.RIGHT);
         AddComponent(0, 0, dbc, jLabelL);
 
-        jTextAreaOfL.setText("0.5");
+        jTextAreaOfL.setText("1");
         AddComponent(0, 1, dbc, jTextAreaOfL);
 
         jLabelRo.setHorizontalAlignment(JTextField.RIGHT);
         AddComponent(1, 0, dbc, jLabelRo);
 
-        jTextAreaOfRo.setText("40");
+        jTextAreaOfRo.setText("45");
         AddComponent(1, 1, dbc, jTextAreaOfRo);
 
         dbc.ipady = 10;
@@ -54,10 +55,9 @@ public class ObliquePanel extends JPanel {
     class ActionListenerOblique implements java.awt.event.ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            for (Figure figure : Main.getModel().getFigures()) {
-                figure.oblique(Double.parseDouble(jTextAreaOfL.getText()),
-                        Double.parseDouble(jTextAreaOfRo.getText()));
-            }
+            Main.getModel().setProjection(OBLIQUE);
+            Main.getModel().setOblique(Double.parseDouble(jTextAreaOfL.getText()),
+                    Double.parseDouble(jTextAreaOfRo.getText()));
             Main.getMainFrame().getDrawingComponent().repaint();
         }
     }

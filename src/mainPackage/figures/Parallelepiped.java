@@ -64,4 +64,9 @@ public class Parallelepiped extends Figure {
                 new Face(points[0], points[7], points[4], points[5])
         };
     }
+
+    @Override
+    public Figure getCopy() {
+        return new Parallelepiped(getPoints());
+    }
 }

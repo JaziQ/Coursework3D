@@ -46,12 +46,27 @@ public class OptionPanel extends JPanel {
         jPanelForScaling.setLayout(new GridLayout(10,2,5,5));
         jPanelForOblique.add(axonometricPanel);
 
+
+        jPanelForOblique = createPanel();
+        PerspectivePanel perspectivePanel = new PerspectivePanel();
+        jPanelForScaling.setLayout(new GridLayout(10,2,5,5));
+        jPanelForOblique.add(perspectivePanel);
+
+
+        jPanelForOblique = createPanel();
+        OrthographicPanel orthographicPanel = new OrthographicPanel();
+        jPanelForScaling.setLayout(new GridLayout(10,2,5,5));
+        jPanelForOblique.add(orthographicPanel);
+
+
         tabs.addTab("Paint", drawingPanel);
         tabs.addTab("Rotate", rotatePanel);
         tabs.addTab("Transit",transitPanel);
         tabs.addTab("Scale", scalePanel);
+        tabs.addTab("Orthographic", orthographicPanel);
         tabs.addTab("Oblique", obliquePanel);
         tabs.addTab("Axonom", axonometricPanel);
+        tabs.addTab("Perspective", perspectivePanel);
         add(tabs);
     }
 

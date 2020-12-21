@@ -5,8 +5,8 @@ import mainPackage.geometry.Face;
 import mainPackage.geometry.Point;
 
 public class Cone extends Figure {
-    public Cone(Point... vertices) {
-        super(vertices);
+    public Cone(Point... points) {
+        super(points);
     }
 
     @Override
@@ -42,5 +42,10 @@ public class Cone extends Figure {
                 faces[i] = new Face(points[i], points[i + 1], points[length]);
             }
         }
+    }
+
+    @Override
+    public Figure getCopy() {
+        return new Cone(getPoints());
     }
 }

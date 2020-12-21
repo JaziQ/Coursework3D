@@ -12,8 +12,11 @@ public abstract class Figure {
     private Point center;
 
     public Figure(Point... points) {
-        this.points = points;
-        center = new Point(-10,-10,0);
+        this.points = new Point[points.length];
+        for (int i = 0; i < points.length; i++) {
+            this.points[i] = points[i].getCopy();
+        }
+        center = new Point(-10, -10, 0);
         buildFaces();
         buildEdges();
     }
@@ -22,17 +25,12 @@ public abstract class Figure {
 
     public abstract void buildFaces();
 
-
-    public void drawFigure(Graphics2D graphics2D) {
+    public void drawFigure(Graphics2D graphics2D, int project) {
         graphics2D.setStroke(new BasicStroke(2));
-        //TODO: Запилить нормальную проверку
-        if (faces == null) {
-            System.out.println("Null");
-            return;
-        }
         for (Face face : faces) {
-            face.drawFace(graphics2D);
+            face.drawFace(graphics2D, project);
         }
+
     }
 
     public void rotate(double angleX, double angleY, double angleZ) {
@@ -40,6 +38,9 @@ public abstract class Figure {
             Operations.rotate(point, angleX, angleY, angleZ);
         }
     }
+
+    public abstract Figure getCopy();
+
 
     public void transit(double dx, double dy, double dz) {
         for (Point point : points) {
@@ -53,17 +54,19 @@ public abstract class Figure {
         }
     }
 
-    public void axonometric(double psi, double fi) {
+/*    public void axonometric(double psi, double fi) {
         for (Point point : points) {
             Operations.axonometric(point, psi, fi);
         }
-    }
+    }*/
 
+/*
     public void oblique(double l, double ro) {
         for (Point point : points) {
             Operations.oblique(point, l, ro);
         }
     }
+*/
 
     public void reset() {
         for (Point point : points) {

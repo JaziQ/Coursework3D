@@ -1,5 +1,7 @@
 package mainPackage.geometry;
 
+import java.util.Arrays;
+
 public class Point {
     private double[][] coordinates;
     private final double[][] startCoordinates;
@@ -17,6 +19,13 @@ public class Point {
     public Point(Point point) {
         coordinates = point.coordinates;
         startCoordinates = point.startCoordinates;
+    }
+
+    public Point getCopy() {
+        double[][] copiedCoordinates = new double[][] {
+                Arrays.copyOf(coordinates[0], coordinates[0].length)
+        };
+        return new Point(copiedCoordinates);
     }
 
     public void resetCoordinates() {
